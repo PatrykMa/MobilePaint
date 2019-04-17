@@ -24,8 +24,11 @@ class DrawView:View {
         paint.color = Color.RED
         paint.strokeWidth = 10f
     }
-    var symetricType = SymetricType.FourAxis
+    var symetricType = SymetricType.None
+        set(value) {field = value
+            invalidate()}
     var drawElementType: DrawableType = DrawableType.Line
+
 
     constructor(context: Context) : super(context) {
         init(null, 0)
@@ -74,10 +77,13 @@ class DrawView:View {
     }
 
     override fun onDraw(canvas: Canvas?) {
-        if (canvas != null)
-        elements.forEach {
-            it.draw(canvas)
+        if (canvas != null) {
+            elements.forEach {
+                it.draw(canvas)
+            }
+            SymetricDrawer.drawAxis(symetricType,canvas)
         }
+
         super.onDraw(canvas)
     }
 }

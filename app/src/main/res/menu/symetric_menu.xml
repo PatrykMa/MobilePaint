@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      >
+    <item android:id="@+id/symetric_none"
+           android:title="None"
+           android:icon="@drawable/icons8_symetric_none_24"
+           android:orderInCategory="100"
+           app:showAsAction="never"/>
+    <item android:id="@+id/symetric_horiontal"
+          android:title="Horizontal"
+          android:icon="@drawable/icons8_symetric_horizontal_24"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/symetric_vertical"
+          android:title="None"
+          android:icon="@drawable/icons8_symetric_vertical_24"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+    <item android:id="@+id/symetric_both"
+          android:title="None"
+          android:icon="@drawable/icons8_symetric_both_24"
+          android:orderInCategory="100"
+          app:showAsAction="never"/>
+
+
+</menu>

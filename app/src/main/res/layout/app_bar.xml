@@ -40,8 +40,16 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
             android:tint="@color/colorAccent"
+            android:src="@drawable/icons8_paint_palette_24"
+            android:id="@+id/pallet"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:tint="@color/colorAccent"
             android:src="@drawable/icons8_line_24"
             android:id="@+id/line"/>
+
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -51,11 +59,4 @@
             android:id="@+id/path"/>
 
 
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/icons8_paint_palette_24"
-            android:id="@+id/pallet"/>
 </LinearLayout>

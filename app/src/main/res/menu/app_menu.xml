@@ -1,10 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.example.patryk.dropdown.MainActivity">
-    <item android:id="@+id/action_settings"
-          android:title=":cos"
-          android:orderInCategory="100"
-          app:showAsAction="never"/>
+    <item
+            android:id="@+id/pallet_menu"
+            android:icon="@drawable/icons8_paint_palette_24"
+            android:orderInCategory="1"
+            android:title="symetric"
+            app:showAsAction="always|withText" />
+    <item
+            android:id="@+id/drawType_menu"
+            android:icon="@drawable/icons8_line_24"
+            android:orderInCategory="1"
+            android:title="symetric"
+            app:showAsAction="always|withText" >
+
+        <menu
+                android:id="@+id/drawType_menuElem">
+            <item android:id="@+id/drawType_fingerPath"
+                  android:title="None"
+                  android:icon="@drawable/icons8_edit_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/drawType_line"
+                  android:title="None"
+                  android:icon="@drawable/icons8_line_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/drawType_emptyCircle"
+                  android:title="None"
+                  android:icon="@drawable/icons8_circle_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/drawType_filledCircle"
+                  android:title="None"
+                  android:icon="@drawable/icons8_filled_circle_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/drawType_emptyRect"
+                  android:title="None"
+                  android:icon="@drawable/icons8_rectangular_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/drawType_filedRect"
+                  android:title="None"
+                  android:icon="@drawable/icons8_filled_rectangular_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+
+        </menu>
+    </item>
+
+    <item
+            android:id="@+id/symetric_menu"
+            android:icon="@drawable/icons8_symetric_none_24"
+            android:orderInCategory="1"
+            android:title="symetric"
+            app:showAsAction="always|withText" >
+
+        <menu>
+            <item android:id="@+id/symetric_none"
+                  android:title="None"
+                  android:icon="@drawable/icons8_symetric_none_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/symetric_horiontal"
+                  android:title="Horizontal"
+                  android:icon="@drawable/icons8_symetric_horizontal_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/symetric_vertical"
+                  android:title="Vertical"
+                  android:icon="@drawable/icons8_symetric_vertical_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/symetric_both"
+                  android:title="Horizontal And Vertical"
+                  android:icon="@drawable/icons8_symetric_both_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+        </menu>
+    </item>
+    <item
+            android:id="@+id/main_menu"
+            android:icon="@android:drawable/ic_menu_directions"
+            android:orderInCategory="1"
+            android:title="symetric"
+            app:showAsAction="always|withText" >
+
+        <menu>
+            <item android:id="@+id/main_save"
+                  android:title="None"
+                  android:icon="@drawable/icons8_line_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/main_load"
+                  android:title="Horizontal"
+                  android:icon="@drawable/icons8_line_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+
+        </menu>
+    </item>
 </menu>

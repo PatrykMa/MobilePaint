@@ -1,6 +1,7 @@
 package com.example.patryk.mobilepaint.drawable.symetry
 
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Point
 import com.example.patryk.mobilepaint.drawable.Drawable
@@ -112,6 +113,28 @@ class SymetricDrawer(var symetricType: SymetricType, drawableType: DrawableType,
             return Point(point.x ,point.y)
         }
     }
-
+    companion object {
+        private val paint = Paint().also { it.alpha = 125; it.color = Color.BLUE; it.strokeWidth = 5f}
+        fun drawAxis(type:SymetricType, canvas: Canvas)
+        {
+            when(type)
+            {
+                SymetricType.Horizontal ->
+                {
+                    canvas.drawLine(0f,canvas.height/2f, canvas.width.toFloat(),canvas.height/2f , paint)
+                }
+                SymetricType.Vertical ->
+                {
+                    canvas.drawLine(canvas.width/2f, 0f, canvas.width/2f,canvas.height.toFloat(), paint)
+                }
+                SymetricType.None -> {}
+                else ->
+                {
+                    canvas.drawLine(0f,canvas.height/2f, canvas.width.toFloat(),canvas.height/2f , paint )
+                    canvas.drawLine(canvas.width/2f, 0f, canvas.width/2f,canvas.height.toFloat(), paint)
+                }
+            }
+        }
+    }
 
 }
