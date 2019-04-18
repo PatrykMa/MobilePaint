@@ -1,62 +1,26 @@
 <?xml version = "1.0" encoding = "utf-8"?>
-<LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
-              xmlns:app = "http://schemas.android.com/apk/res-auto"
-              android:layout_width = "match_parent"
-              android:layout_height = "wrap_content"
-              android:gravity = "center_vertical"
-              android:padding = "10dp"
-              android:weightSum = "1">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:weightSum="1" android:gravity="left">
 
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="2dp"
             android:tint="@color/colorAccent"
             android:src="@drawable/icons8_filled_circle_24"
-            android:id="@+id/circle"/>
+            android:id="@+id/back"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="2dp"
             android:tint="@color/colorAccent"
             android:src="@drawable/icons8_circle_24"
-            android:id="@+id/circleEmpty"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/icons8_filled_rectangular_24"
-            android:id="@+id/rectangle"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/icons8_rectangular_24"
-            android:id="@+id/emptyRectangle"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/icons8_paint_palette_24"
-            android:id="@+id/pallet"/>
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/icons8_line_24"
-            android:id="@+id/line"/>
+            android:id="@+id/forward"/>
 
-    <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/icons8_edit_24"
-            android:id="@+id/path"/>
 
 
 </LinearLayout>

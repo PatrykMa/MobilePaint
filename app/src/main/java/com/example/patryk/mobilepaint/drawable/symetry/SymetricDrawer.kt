@@ -1,9 +1,6 @@
 package com.example.patryk.mobilepaint.drawable.symetry
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Point
+import android.graphics.*
 import com.example.patryk.mobilepaint.drawable.Drawable
 import com.example.patryk.mobilepaint.drawable.DrawableFactory
 import com.example.patryk.mobilepaint.drawable.DrawableType
@@ -114,24 +111,41 @@ class SymetricDrawer(var symetricType: SymetricType, drawableType: DrawableType,
         }
     }
     companion object {
-        private val paint = Paint().also { it.alpha = 125; it.color = Color.BLUE; it.strokeWidth = 5f}
+        private val paint = Paint(Paint.ANTI_ALIAS_FLAG).also {  it.color = Color.BLACK;it.alpha = 60;
+            it.style = Paint.Style.STROKE
+            it.strokeWidth = 5f;
+            it.pathEffect = DashPathEffect(floatArrayOf(12f,20f),0f)
+            it.isAntiAlias = true
+            }
         fun drawAxis(type:SymetricType, canvas: Canvas)
         {
+            val path = Path()
             when(type)
             {
                 SymetricType.Horizontal ->
                 {
-                    canvas.drawLine(0f,canvas.height/2f, canvas.width.toFloat(),canvas.height/2f , paint)
+                    path.moveTo(0f,canvas.height/2f)
+                    path.quadTo(0f,canvas.height/2f,canvas.width.toFloat(),canvas.height/2f)
+                    canvas.drawPath(path, paint)
+                    //canvas.drawLine(0f,canvas.height/2f, canvas.width.toFloat(),canvas.height/2f , paint)
                 }
                 SymetricType.Vertical ->
                 {
-                    canvas.drawLine(canvas.width/2f, 0f, canvas.width/2f,canvas.height.toFloat(), paint)
+                    path.moveTo(canvas.width/2f,0f)
+                    path.quadTo(canvas.width/2f,0f,canvas.width/2f,canvas.height.toFloat())
+                    canvas.drawPath(path, paint)
+                    //canvas.drawLine(canvas.width/2f, 0f, canvas.width/2f,canvas.height.toFloat(), paint)
                 }
                 SymetricType.None -> {}
                 else ->
                 {
-                    canvas.drawLine(0f,canvas.height/2f, canvas.width.toFloat(),canvas.height/2f , paint )
-                    canvas.drawLine(canvas.width/2f, 0f, canvas.width/2f,canvas.height.toFloat(), paint)
+                    path.moveTo(0f,canvas.height/2f)
+                    path.quadTo(0f,canvas.height/2f,canvas.width.toFloat(),canvas.height/2f)
+                    path.moveTo(canvas.width/2f,0f)
+                    path.quadTo(canvas.width/2f,0f,canvas.width/2f,canvas.height.toFloat())
+                    canvas.drawPath(path, paint)
+                    //canvas.drawLine(0f,canvas.height/2f, canvas.width.toFloat(),canvas.height/2f , paint )
+                    //canvas.drawLine(canvas.width/2f, 0f, canvas.width/2f,canvas.height.toFloat(), paint)
                 }
             }
         }

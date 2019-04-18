@@ -1,10 +1,12 @@
 package com.example.patryk.mobilepaint
 
 import android.content.res.Configuration
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.patryk.mobilepaint.drawable.DrawableType
@@ -22,31 +24,56 @@ class MainActivity : AppCompatActivity() {
         actionBar
         drawView = findViewById<DrawView>(R.id.drawView)
         setOnClickListenerToAppBarViews()
+        refreshRedoAndUndo()
     }
     private fun setOnClickListenerToAppBarViews()
     {
-        findViewById<ImageView>(R.id.line).setOnClickListener {
-            drawView.drawElementType =DrawableType.Line
+        findViewById<ImageView>(R.id.back).setOnClickListener {
+            drawView.undo()
+            refreshRedoAndUndo()
         }
-        findViewById<ImageView>(R.id.path).setOnClickListener {
-            drawView.drawElementType =DrawableType.FingerPath
+        findViewById<ImageView>(R.id.forward).setOnClickListener {
+            drawView.redo()
+            refreshRedoAndUndo()
         }
-        findViewById<ImageView>(R.id.circle).setOnClickListener {
-            drawView.drawElementType =DrawableType.Circle
-        }
-        findViewById<ImageView>(R.id.pallet).setOnClickListener {
-            createPalletAlert()
-        }
-        findViewById<ImageView>(R.id.circleEmpty).setOnClickListener {
-            drawView.drawElementType =DrawableType.EmptyCircle
-        }
-        findViewById<ImageView>(R.id.emptyRectangle).setOnClickListener {
-            drawView.drawElementType =DrawableType.EmptyRectangle
-        }
-        findViewById<ImageView>(R.id.rectangle).setOnClickListener {
-            drawView.drawElementType =DrawableType.Rectangle
-        }
+
     }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        when(event?.action){
+            MotionEvent.ACTION_UP ->
+            {
+                refreshRedoAndUndo()
+            }
+        }
+
+        return super.onTouchEvent(event)
+    }
+    private fun refreshRedoAndUndo()
+    {
+
+        val backIco = findViewById<ImageView>(R.id.back)
+        val forwardIco = findViewById<ImageView>(R.id.forward)
+        if (drawView.canUndo){
+            backIco.setColorFilter(drawView.paint.color)
+        }
+        else{
+            backIco.setColorFilter(Color.GRAY)
+        }
+
+        if (drawView.canRedo)
+        {
+            forwardIco.setColorFilter(drawView.paint.color)
+        }
+        else{
+            forwardIco.setColorFilter(Color.GRAY)
+        }
+
+        backIco.invalidate()
+        forwardIco.invalidate()
+
+    }
+    
 
     private fun createPalletAlert(){
         val dialog = ColorPalletDialog(this).also {
@@ -55,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                     setColor(it.color)
                 }
                         it.color = drawView.paint.color
+                refreshRedoAndUndo()
             }
         }
 
@@ -67,15 +95,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun setColor(color:Int)
     {
-        val drawMenu = (menu?.findItem(R.id.drawType_menuElem) as Menu?)
-        if(drawMenu != null)
-        for (i in 0 until drawMenu.size())
-        {
-            drawMenu.getItem(i).icon.setTint(color)
-        }
+
         for (i in 0 until menu!!.size())
         {
             menu!!.getItem(i).icon.setTint(color)
+            if(menu!!.getItem(i).hasSubMenu())
+                for (j in 0 until menu!!.getItem(i).subMenu.size())
+                {
+                    menu!!.getItem(i).subMenu.getItem(j).icon.setTint(color)
+                }
         }
     }
 

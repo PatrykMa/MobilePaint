@@ -18,6 +18,7 @@ import com.example.patryk.mobilepaint.drawable.symetry.SymetricType
 
 class DrawView:View {
     private var elements = mutableListOf<Drawable>()
+    private var removeElements = mutableListOf<Drawable>()
     var paint: Paint
     init {
         paint = Paint()
@@ -41,6 +42,30 @@ class DrawView:View {
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) {
         init(attrs, defStyle)
     }
+     var canUndo:Boolean
+        set(value) {}
+        get() {return elements.isNotEmpty()}
+    fun undo()
+    {
+        if (elements.isNotEmpty())
+        {
+            removeElements.add(elements.last())
+            elements.removeAt(elements.size-1)
+        }
+        invalidate()
+    }
+    var canRedo:Boolean
+        set(value) {}
+        get() {return removeElements.isNotEmpty()}
+    fun redo()
+    {
+        if(removeElements.isNotEmpty())
+        {
+            elements.add(removeElements.last())
+            removeElements.removeAt(removeElements.size-1)
+        }
+        invalidate()
+    }
 
     private fun init(attrs: AttributeSet?, defStyle: Int) {
         // Load attributes
@@ -59,13 +84,15 @@ class DrawView:View {
                 mY = event.y
                 addElement()
                 elements.last().onTouchDown(Point(mX.toInt(),mY.toInt()))
+                removeElements.clear()
+                return true
             }
             MotionEvent.ACTION_MOVE -> {
                 elements.last().onTouchDown(Point((event.x).toInt(),( event.y).toInt()))
             }
         }
         invalidate()
-        return true
+        return false
     }
 
     private fun addElement()
