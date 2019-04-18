@@ -1,7 +1,10 @@
 package com.example.patryk.mobilepaint
 
+import android.content.DialogInterface
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +12,7 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import com.example.patryk.mobilepaint.drawable.DrawableType
 import com.example.patryk.mobilepaint.drawable.symetry.SymetricType
 
@@ -73,7 +77,22 @@ class MainActivity : AppCompatActivity() {
         forwardIco.invalidate()
 
     }
-    
+
+
+
+    private fun rotationChangeDialog(newConfig: Configuration)
+    {
+        val alert = android.app.AlertDialog.Builder(this).let {
+            it.setTitle("Obracacnie")
+            it.setMessage("Jeśli obrucisz ekran wszystkie elementy ostaną zniszczone")
+            it.setPositiveButton("tak",DialogInterface.OnClickListener{
+                dialog: DialogInterface?, which: Int ->
+                //super.onConfigurationChanged(newConfig)
+            })
+            it.setNegativeButton("nie",DialogInterface.OnClickListener{dialog: DialogInterface?, which: Int ->  })
+        }
+        alert.create()
+    }
 
     private fun createPalletAlert(){
         val dialog = ColorPalletDialog(this).also {
@@ -166,6 +185,17 @@ class MainActivity : AppCompatActivity() {
             R.id.pallet_menu ->
             {
                 createPalletAlert()
+            }
+            R.id.main_orientation ->{
+                val orientation = resources.configuration.orientation
+                if (orientation == Configuration.ORIENTATION_PORTRAIT)
+                {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                }
+                else if (orientation == Configuration.ORIENTATION_LANDSCAPE)
+                {
+                    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                }
             }
 
 

@@ -91,6 +91,11 @@
             app:showAsAction="always|withText" >
 
         <menu>
+            <item android:id="@+id/main_orientation"
+                  android:title="ChangeOrientation"
+                  android:icon="@drawable/icons8_circle_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
             <item android:id="@+id/main_save"
                   android:title="None"
                   android:icon="@drawable/icons8_line_24"
