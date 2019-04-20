@@ -28,6 +28,85 @@
                     android:layout_height="match_parent" app:srcCompat="@color/colorAccent"
                     tools:layout_editor_absoluteY="346dp" tools:layout_editor_absoluteX="148dp"
                     android:id="@+id/imageView_color" android:layout_margin="5dp"/>
+            <LinearLayout
+                    android:id="@+id/colorSet1"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1" android:layout_margin="5dp"
+                        android:background="@android:color/black"/>
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/white"
+                        android:layout_weight="1" android:layout_margin="5dp"
+                />
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/holo_blue_dark"
+                        android:layout_weight="1" android:layout_margin="5dp"
+                        android:backgroundTintMode="src_in"/>
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/holo_blue_light"
+
+                        android:layout_weight="1" android:layout_margin="5dp"/>
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/holo_red_dark"
+                        android:layout_weight="1" android:layout_margin="5dp"/>
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_weight="1" android:layout_margin="5dp"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                    android:id="@+id/colorSet2"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/holo_green_light"
+                        android:layout_weight="1" android:layout_margin="5dp"/>
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/holo_green_dark"
+                        android:layout_weight="1" android:layout_margin="5dp"/>
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/holo_orange_dark"
+                        android:layout_weight="1" android:layout_margin="5dp"/>
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/holo_orange_light"
+                        android:layout_weight="1" android:layout_margin="5dp"/>
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/holo_purple"
+                        android:layout_weight="1" android:layout_margin="5dp"/>
+                <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@android:color/holo_red_light"
+                        android:layout_weight="1" android:layout_margin="5dp"/>
+
+
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"

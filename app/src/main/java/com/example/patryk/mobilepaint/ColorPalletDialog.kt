@@ -10,12 +10,16 @@ import android.R.attr.data
 import android.content.DialogInterface
 import android.view.KeyEvent
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import com.skydoves.colorpickerpreference.ColorPickerView
 import android.widget.LinearLayout
 import com.google.android.material.button.MaterialButton
 import com.skydoves.colorpickerpreference.ColorEnvelope
 import com.skydoves.colorpickerpreference.ColorListener
+import kotlinx.android.synthetic.main.activity_main.view.*
+import android.graphics.drawable.ColorDrawable
+
 
 
 
@@ -63,6 +67,27 @@ class ColorPalletDialog(context: Context): AlertDialog(context) {
             onNegativeEnd()
             cancel()
         }
+        val set = findViewById<LinearLayout>(R.id.colorSet1)
+        if (set != null)
+            for (i in 0 until set.childCount)
+            {
+                set.getChildAt(i).setOnClickListener {
+                    val background = it.background
+                    if (background is ColorDrawable)
+                        color = (background as ColorDrawable).color
+                }
+            }
+        val set2 = findViewById<LinearLayout>(R.id.colorSet2)
+        if (set2 != null)
+            for (i in 0 until set2.childCount)
+            {
+                set2.getChildAt(i).setOnClickListener {
+                    val background = it.background
+                    if (background is ColorDrawable)
+                        color = (background as ColorDrawable).color
+                }
+            }
 
     }
+
 }

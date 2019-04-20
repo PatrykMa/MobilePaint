@@ -8,13 +8,13 @@
             android:id="@+id/pallet_menu"
             android:icon="@drawable/icons8_paint_palette_24"
             android:orderInCategory="1"
-            android:title="symetric"
+            android:title="Paleta"
             app:showAsAction="always|withText" />
     <item
             android:id="@+id/drawType_menu"
             android:icon="@drawable/icons8_line_24"
             android:orderInCategory="1"
-            android:title="symetric"
+            android:title="Narzędzie"
             app:showAsAction="always|withText" >
 
         <menu
@@ -57,7 +57,7 @@
             android:id="@+id/symetric_menu"
             android:icon="@drawable/icons8_symetric_none_24"
             android:orderInCategory="1"
-            android:title="symetric"
+            android:title="Symetria"
             app:showAsAction="always|withText" >
 
         <menu>
@@ -87,12 +87,12 @@
             android:id="@+id/main_menu"
             android:icon="@android:drawable/ic_menu_directions"
             android:orderInCategory="1"
-            android:title="symetric"
+            android:title="Opcje"
             app:showAsAction="always|withText" >
 
         <menu>
             <item android:id="@+id/main_orientation"
-                  android:title="ChangeOrientation"
+                  android:title="Zmiana Orientacji"
                   android:icon="@drawable/icons8_circle_24"
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
@@ -102,7 +102,7 @@
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
             <item android:id="@+id/main_load"
-                  android:title="Horizontal"
+                  android:title="Wczytaj"
                   android:icon="@drawable/icons8_line_24"
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
