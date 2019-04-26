@@ -93,17 +93,17 @@
         <menu>
             <item android:id="@+id/main_orientation"
                   android:title="Zmiana Orientacji"
-                  android:icon="@drawable/icons8_circle_24"
+                  android:icon="@drawable/icons8_synchronize_24"
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
             <item android:id="@+id/main_save"
                   android:title="None"
-                  android:icon="@drawable/icons8_line_24"
+                  android:icon="@drawable/icons8_save_all_24"
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
             <item android:id="@+id/main_load"
                   android:title="Wczytaj"
-                  android:icon="@drawable/icons8_line_24"
+                  android:icon="@drawable/icons8_download_24"
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
 

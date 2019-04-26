@@ -11,14 +11,14 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:tint="@color/colorAccent"
-            android:src="@drawable/icons8_filled_circle_24"
+            android:src="@drawable/icons8_undo_24"
             android:id="@+id/back"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="2dp"
             android:tint="@color/colorAccent"
-            android:src="@drawable/icons8_circle_24"
+            android:src="@drawable/icons8_redo_24"
             android:id="@+id/forward"/>
 
 
