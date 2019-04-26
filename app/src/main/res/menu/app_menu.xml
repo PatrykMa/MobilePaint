@@ -4,6 +4,13 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.example.patryk.dropdown.MainActivity">
+
+    <item
+            android:id="@+id/size"
+            android:icon="@drawable/icons8_enlarge_24"
+            android:orderInCategory="1"
+            android:title="Paleta"
+            app:showAsAction="always|withText" />
     <item
             android:id="@+id/pallet_menu"
             android:icon="@drawable/icons8_paint_palette_24"
@@ -104,6 +111,11 @@
             <item android:id="@+id/main_load"
                   android:title="Wczytaj"
                   android:icon="@drawable/icons8_download_24"
+                  android:orderInCategory="100"
+                  app:showAsAction="never"/>
+            <item android:id="@+id/main_clear"
+                  android:title="Wczytaj"
+                  android:icon="@drawable/icons8_empty_trash_24"
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
 

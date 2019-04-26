@@ -96,6 +96,7 @@ class DrawView:View {
     {
         elements.clear()
         removeElements.clear()
+        invalidate()
     }
 
     private fun init(attrs: AttributeSet?, defStyle: Int) {

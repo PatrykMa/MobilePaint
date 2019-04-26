@@ -42,6 +42,7 @@ class Adapter {
             if (mSeekListener == null) {
                 mSeekListener = onSeekbarChange()
             }
+
         }
 
         override fun getCount(): Int {

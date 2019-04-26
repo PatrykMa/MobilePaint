@@ -17,12 +17,16 @@ import com.example.patryk.mobilepaint.drawable.DrawableType
 import com.example.patryk.mobilepaint.drawable.symetry.SymetricType
 import android.content.Intent
 import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.EditText
+import android.widget.SeekBar
 import androidx.appcompat.app.ActionBar
 
 import androidx.core.app.ActivityCompat
@@ -40,30 +44,63 @@ class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
     private val PICK_IMAGE = 2
     private val PERMISSIONS = 3
 
+    // The following are used for the shake detection
+	private lateinit var mSensorManager: SensorManager
+	private lateinit var mAccelerometer: Sensor
+	private lateinit var mShakeDetector:ShakeDetector
+
     private lateinit var menuSeekbar:SimpleSeekBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        drawView = findViewById<DrawView>(R.id.drawView)
+
+
+        //menuSeekbar = SimpleSeekBar(this)
+        //menuSeekbar.onValueChange={
+        //    if(menuSeekbar.progresValue != null)
+        //        drawView.paint.strokeWidth = menuSeekbar.progresValue!!.toFloat()}
+        //menuSeekbar.progresValue = drawView.paint.strokeWidth.toInt()
+        //val adapter = Adapter()
+        //supportActionBar?.navigationMode = ActionBar.NAVIGATION_MODE_LIST
+        //supportActionBar?.setListNavigationCallbacks(adapter.getAdapter(this, arrayListOf(menuSeekbar),"Rozmiar"), this);
         getSupportActionBar()?.setDisplayShowCustomEnabled(true)
         getSupportActionBar()?.setCustomView(R.layout.app_bar)
-        actionBar
-        drawView = findViewById<DrawView>(R.id.drawView)
         setOnClickListenerToAppBarViews()
         refreshRedoAndUndo()
-        menuSeekbar = SimpleSeekBar(this)
-        menuSeekbar.onValueChange={
-            if(menuSeekbar.progresValue != null)
-                drawView.paint.strokeWidth = menuSeekbar.progresValue!!.toFloat()}
-        menuSeekbar.progresValue = drawView.paint.strokeWidth.toInt()
-        val adapter = Adapter()
-        supportActionBar?.navigationMode = ActionBar.NAVIGATION_MODE_LIST
-        supportActionBar?.setListNavigationCallbacks(adapter.getAdapter(this, arrayListOf(menuSeekbar),"Rozmiar"), this);
 
+        mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+		mAccelerometer = mSensorManager
+				.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		mShakeDetector =ShakeDetector()
+		mShakeDetector.mListener = {count: Int ->
+            createClearDialog()
+        }
     }
 
     override fun onNavigationItemSelected(itemPosition: Int, itemId: Long): Boolean {
        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         return false
+    }
+
+    private fun createSizeDialog(){
+
+        val seekBar = SeekBar(this)
+        seekBar.progress = drawView.paint.strokeWidth.toInt()
+        val alert = AlertDialog.Builder(this).let {
+            it.setTitle("Rozmiar pędzla")
+            it.setMessage("Ustaw")
+            it.setView(seekBar)
+            it.setPositiveButton("Zapisz",DialogInterface.OnClickListener{
+                    dialog: DialogInterface?, which: Int ->
+                drawView.paint.strokeWidth = seekBar.progress.toFloat()
+            }).create()
+            // it.setNegativeButton("Anuluj",DialogInterface.OnClickListener{dialog: DialogInterface?, which: Int ->  })
+        }
+        alert.setOnShowListener {
+            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE)
+        }
+        alert.show()
     }
 
     private fun setOnClickListenerToAppBarViews()
@@ -148,6 +185,18 @@ class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
         }
     }
 
+    public override fun onResume() {
+        super.onResume()
+        // Add the following line to register the Session Manager Listener onResume
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI)
+    }
+
+    public override fun onPause() {
+        // Add the following line to unregister the Sensor Manager onPause
+        mSensorManager.unregisterListener(mShakeDetector)
+        super.onPause()
+    }
+
     private fun setColor(color:Int)
     {
         //val colorWithOutAlfa = ColorUtils.setAlphaComponent(color, 0)
@@ -160,6 +209,24 @@ class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
                     menu!!.getItem(i).subMenu.getItem(j).icon.setTint(color)
                 }
         }
+    }
+
+    private fun createClearDialog(){
+
+        val alert = AlertDialog.Builder(this).let {
+            it.setTitle("Czy na pewno chcesz wyczyści widok")
+
+
+            it.setPositiveButton("Tak",DialogInterface.OnClickListener{
+                    dialog: DialogInterface?, which: Int ->
+                drawView.clear()
+            }).create()
+            // it.setNegativeButton("Anuluj",DialogInterface.OnClickListener{dialog: DialogInterface?, which: Int ->  })
+        }
+        alert.setOnShowListener {
+            alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE)
+        }
+        alert.show()
     }
 
     private var menu:Menu? = null
@@ -231,7 +298,14 @@ class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
                 drawView.drawElementType = DrawableType.Line
                 menu?.findItem(R.id.drawType_menu)?.icon = getDrawable(DrawableType.getIcoID(drawView.drawElementType))
             }
+            R.id.size ->{
+                createSizeDialog()
+            }
             //pallet
+            R.id.main_clear -> {
+                createClearDialog()
+            }
+
             R.id.pallet_menu ->
             {
                 createPalletAlert()
