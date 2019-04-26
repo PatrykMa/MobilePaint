@@ -104,10 +104,17 @@
         </LinearLayout>
     </LinearLayout>
     <ImageView
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             android:layout_width="match_parent"
-            android:layout_height="30dp" app:srcCompat="@color/colorAccent"
+            android:layout_height="30dp"
             tools:layout_editor_absoluteY="346dp" tools:layout_editor_absoluteX="148dp"
-            android:id="@+id/imageView_color" android:layout_margin="5dp"/>
+            android:id="@+id/imageView_color" android:layout_margin="5dp"
+            app:srcCompat="@drawable/pobrane" android:accessibilityHeading="false"/>
+    <com.example.patryk.mobilepaint.AlfeGradientSeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/alfeGradientSeekBar"
+    />
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

@@ -1,11 +1,10 @@
 package com.example.patryk.mobilepaint
 
-import android.R.attr.button
+
 import android.content.DialogInterface
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -17,29 +16,31 @@ import android.widget.ImageView
 import com.example.patryk.mobilepaint.drawable.DrawableType
 import com.example.patryk.mobilepaint.drawable.symetry.SymetricType
 import android.content.Intent
-import android.util.Log
-import android.R.attr.data
 import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Environment
 import android.provider.MediaStore
-import android.os.Environment.getExternalStorageDirectory
-import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
+import androidx.appcompat.app.ActionBar
+
 import androidx.core.app.ActivityCompat
+import androidx.core.graphics.ColorUtils
+import com.example.patryk.appbarwithdropdownseekbar.Adapter
+import com.example.patryk.mobilepaint.menu_seekbar.SimpleSeekBar
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
 
     lateinit private var drawView:DrawView
     private val PICK_IMAGE = 2
     private val PERMISSIONS = 3
+
+    private lateinit var menuSeekbar:SimpleSeekBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,7 +50,22 @@ class MainActivity : AppCompatActivity() {
         drawView = findViewById<DrawView>(R.id.drawView)
         setOnClickListenerToAppBarViews()
         refreshRedoAndUndo()
+        menuSeekbar = SimpleSeekBar(this)
+        menuSeekbar.onValueChange={
+            if(menuSeekbar.progresValue != null)
+                drawView.paint.strokeWidth = menuSeekbar.progresValue!!.toFloat()}
+        menuSeekbar.progresValue = drawView.paint.strokeWidth.toInt()
+        val adapter = Adapter()
+        supportActionBar?.navigationMode = ActionBar.NAVIGATION_MODE_LIST
+        supportActionBar?.setListNavigationCallbacks(adapter.getAdapter(this, arrayListOf(menuSeekbar),"Rozmiar"), this);
+
     }
+
+    override fun onNavigationItemSelected(itemPosition: Int, itemId: Long): Boolean {
+       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return false
+    }
+
     private fun setOnClickListenerToAppBarViews()
     {
         findViewById<ImageView>(R.id.back).setOnClickListener {
@@ -134,7 +150,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setColor(color:Int)
     {
-
+        //val colorWithOutAlfa = ColorUtils.setAlphaComponent(color, 0)
         for (i in 0 until menu!!.size())
         {
             menu!!.getItem(i).icon.setTint(color)

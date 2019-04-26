@@ -19,9 +19,7 @@ import com.skydoves.colorpickerpreference.ColorEnvelope
 import com.skydoves.colorpickerpreference.ColorListener
 import kotlinx.android.synthetic.main.activity_main.view.*
 import android.graphics.drawable.ColorDrawable
-
-
-
+import java.lang.Exception
 
 
 class ColorPalletDialog(context: Context): AlertDialog(context) {
@@ -32,6 +30,15 @@ class ColorPalletDialog(context: Context): AlertDialog(context) {
         set(value) {
             field = value
             findViewById<ImageView>(R.id.imageView_color)?.setColorFilter(value)
+            findViewById<AlfeGradientSeekBar>(R.id.alfeGradientSeekBar)?.color = value
+        }
+        get() {
+            try {
+                return findViewById<AlfeGradientSeekBar>(R.id.alfeGradientSeekBar)!!.color
+            }
+            catch (e:Exception) {
+               return field
+            }
         }
 
     var onPositiveClose:()->Unit = {}
@@ -67,6 +74,12 @@ class ColorPalletDialog(context: Context): AlertDialog(context) {
             onNegativeEnd()
             cancel()
         }
+
+        val alphaSeekBar = findViewById<AlfeGradientSeekBar>(R.id.alfeGradientSeekBar)
+        alphaSeekBar?.onColorChange = {
+            this.color = alphaSeekBar!!.color
+        }
+
         val set = findViewById<LinearLayout>(R.id.colorSet1)
         if (set != null)
             for (i in 0 until set.childCount)
