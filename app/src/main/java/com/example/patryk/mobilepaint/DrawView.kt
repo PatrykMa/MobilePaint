@@ -29,7 +29,7 @@ class DrawView:View {
     init {
         paint = Paint()
         paint.color = Color.RED
-        paint.strokeWidth = 100f
+        paint.strokeWidth = 10f
         this.setDrawingCacheEnabled(true);
 
     }

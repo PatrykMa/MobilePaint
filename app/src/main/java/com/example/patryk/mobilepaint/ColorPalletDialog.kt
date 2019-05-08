@@ -29,8 +29,9 @@ class ColorPalletDialog(context: Context): AlertDialog(context) {
     var color = 0
         set(value) {
             field = value
-            findViewById<ImageView>(R.id.imageView_color)?.setColorFilter(value)
             findViewById<AlfeGradientSeekBar>(R.id.alfeGradientSeekBar)?.color = value
+            findViewById<ImageView>(R.id.imageView_color)?.setColorFilter(findViewById<AlfeGradientSeekBar>(R.id.alfeGradientSeekBar)!!.color)
+
         }
         get() {
             try {

@@ -21,6 +21,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.ColorMatrixColorFilter
+import android.graphics.drawable.ColorDrawable
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Environment
@@ -38,7 +40,7 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 
 
-class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
+class MainActivity : AppCompatActivity() {
 
     lateinit private var drawView:DrawView
     private val PICK_IMAGE = 2
@@ -76,12 +78,12 @@ class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
 		mShakeDetector.mListener = {count: Int ->
             createClearDialog()
         }
+
     }
 
-    override fun onNavigationItemSelected(itemPosition: Int, itemId: Long): Boolean {
-       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        return false
-    }
+
+
+
 
     private fun createSizeDialog(){
 
@@ -189,6 +191,7 @@ class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
         super.onResume()
         // Add the following line to register the Session Manager Listener onResume
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI)
+
     }
 
     public override fun onPause() {
@@ -199,6 +202,7 @@ class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
 
     private fun setColor(color:Int)
     {
+        setAppBarColor(color)
         //val colorWithOutAlfa = ColorUtils.setAlphaComponent(color, 0)
         for (i in 0 until menu!!.size())
         {
@@ -209,6 +213,40 @@ class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
                     menu!!.getItem(i).subMenu.getItem(j).icon.setTint(color)
                 }
         }
+    }
+
+    private fun setAppBarColor(colorTochange:Int)
+    {
+        val bar = getSupportActionBar()
+        var colorToSet = Color.RED
+
+        val red = Color.red(colorTochange)
+        val green = Color.green(colorTochange)
+        val blue = Color.blue(colorTochange)
+
+        val NEGATIVE = floatArrayOf(
+            -1.0f, 0f, 0f, 0f, 255f, // red
+            0f, -1.0f, 0f, 0f, 255f, // green
+            0f, 0f, -1.0f, 0f, 255f, // blue
+            0f, 0f, 0f, 1.0f, 0f  // alpha
+        )
+
+        if( red == Math.max(red, green) && red == Math.max(red, blue) )
+            colorToSet = Color.BLUE
+//
+        if( blue == Math.max(blue, green) && blue == Math.max(red, blue) )
+            colorToSet = Color.GREEN
+//
+        if( green == Math.max(red, green) && green == Math.max(green, blue) )
+            colorToSet = Color.RED
+
+        bar?.setBackgroundDrawable(ColorDrawable(colorTochange).also { it.setColorFilter(ColorMatrixColorFilter(NEGATIVE))})
+
+        //val newRed = (0.393 * red + 0.769 * green + 0.189 * blue).toInt()
+        //val newGreen = (0.349 * red + 0.686 * green + 0.168 * green).toInt()
+        //val newBlue = (0.272 * red + 0.534 * green + 0.131 * green).toInt()
+        //val sepia = Color.rgb(newRed, newGreen, newBlue)
+        //bar?.setBackgroundDrawable(ColorDrawable(sepia))
     }
 
     private fun createClearDialog(){
@@ -235,7 +273,10 @@ class MainActivity : AppCompatActivity(), ActionBar.OnNavigationListener {
         this.menu = menu
         inflater.inflate(R.menu.app_menu, menu)
         //inflater.inflate(R.menu.symetric_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+        val r=super.onCreateOptionsMenu(menu)
+        setColor(drawView.paint.color)
+        return r
+
     }
 
     private fun selectImage()

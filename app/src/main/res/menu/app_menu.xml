@@ -9,7 +9,7 @@
             android:id="@+id/size"
             android:icon="@drawable/icons8_enlarge_24"
             android:orderInCategory="1"
-            android:title="Paleta"
+            android:title="Rozmiar"
             app:showAsAction="always|withText" />
     <item
             android:id="@+id/pallet_menu"
@@ -92,7 +92,7 @@
     </item>
     <item
             android:id="@+id/main_menu"
-            android:icon="@android:drawable/ic_menu_directions"
+            android:icon="@drawable/icons8_services_24"
             android:orderInCategory="1"
             android:title="Opcje"
             app:showAsAction="always|withText" >
@@ -104,7 +104,7 @@
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
             <item android:id="@+id/main_save"
-                  android:title="None"
+                  android:title="Zapisz"
                   android:icon="@drawable/icons8_save_all_24"
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
@@ -114,7 +114,7 @@
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
             <item android:id="@+id/main_clear"
-                  android:title="Wczytaj"
+                  android:title="Czyść"
                   android:icon="@drawable/icons8_empty_trash_24"
                   android:orderInCategory="100"
                   app:showAsAction="never"/>
